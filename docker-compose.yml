@@ -5,16 +5,49 @@ services:
   config01:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27017 --configsvr --replSet configserver --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
   config02:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27017 --configsvr --replSet configserver --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
   config03:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27017 --configsvr --replSet configserver --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
 
@@ -22,31 +55,97 @@ services:
   shard01a:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27018 --shardsvr --replSet shard01 --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
   shard01b:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27018 --shardsvr --replSet shard01 --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
   shard02a:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27019 --shardsvr --replSet shard02 --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
   shard02b:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27019 --shardsvr --replSet shard02 --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
   shard03a:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27020 --shardsvr --replSet shard03 --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
   shard03b:
     image: mongo:4.2.0
     command: mongod --maxConns 64000 --port 27020 --shardsvr --replSet shard03 --oplogSize 16 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     volumes:
       - ./scripts:/scripts
 
@@ -54,6 +153,17 @@ services:
   router:
     image: mongo:4.2.0
     command: mongos --maxConns 64000 --port 27017 --configdb configserver/config01:27017,config02:27017,config03:27017 --bind_ip_all
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 64000
+        hard: 64000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
     ports:
       - "27017:27017"
     volumes:
